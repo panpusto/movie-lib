@@ -1,4 +1,4 @@
-import MainNavigation from "./MainNavigation";
+import MainNavigation from "./MainNavigation/MainNavigation";
 
 function Layout({children}) {
     return (

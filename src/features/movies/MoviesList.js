@@ -1,18 +1,34 @@
+import Spinner from "../../components/Spinner";
+import MovieCard from "./MovieCard";
 import { moviesFound } from "./moviesSlice";
 import { useSelector } from "react-redux";
 
 function MoviesList() {
     const movies = useSelector(moviesFound);
-    console.log(movies)
+    const status = useSelector(state => state.movies.status)
+    const error = useSelector(state => state.movies.error);
+    console.log(status);
+    console.log(movies);
+    let content;
+
+    if (status === 'loading') {
+        content = <Spinner />
+    } else if (status === 'succeeded') {
+        content = (
+            <div className="movie-list">
+                {movies.map(movie => (
+                    <MovieCard key={movie.imdbID}  movie={movie} />
+                    )
+                )}
+            </div>
+            )
+    } else if (status === 'failed') {
+        content = <div className="error">{error}</div>
+    }
+
     return (
         <main>
-            <ul>
-                {movies && movies.map(movie => (
-                    <li key={movie.imdbID}>
-                        {movie.Title} - {movie.Year}
-                    </li>
-                ))}
-            </ul>
+            {content}
         </main>
     )
 }

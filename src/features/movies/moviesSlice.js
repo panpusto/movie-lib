@@ -9,15 +9,22 @@ const initialState = {
 
 const API_URL = 'http://www.omdbapi.com/?apikey=';
 const API_KEY = 'b0a90448';
+const DELAY_TIME = 2000;
 
-export const searchMovieByTitle = createAsyncThunk(
+export const searchMoviesByTitle = createAsyncThunk(
     'movies/searchMovieByTitle',
-    async (query) => {
+    async (query, { rejectWithValue }) => {
+        await new Promise((resolve) => setTimeout(resolve, `${DELAY_TIME}`));
         const response = await fetch(`${API_URL}${API_KEY}&s=${query}`);
         const data = await response.json();
-        return data.Search;
+
+        if (data.Response === "False") {
+            return rejectWithValue(data.Error);
+        }
+        
+        return data.Search || [];
     }
-)
+);
 
 const moviesSlice = createSlice({
     name: 'movies',
@@ -25,25 +32,28 @@ const moviesSlice = createSlice({
     reducers: {
         movieSearched(state, action) {
             state.searchMovie = action.payload
-        } 
+        },
+        clearSearchedMovies(state, action) {
+            state.searchedMovies = []
+        }
     },
     extraReducers(builder) {
         builder
-            .addCase(searchMovieByTitle.pending, (state, action) => {
+            .addCase(searchMoviesByTitle.pending, (state, action) => {
                 state.status = 'loading'
             })
-            .addCase(searchMovieByTitle.fulfilled, (state, action) => {
+            .addCase(searchMoviesByTitle.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.searchedMovies = state.searchedMovies.concat(action.payload)
             })
-            .addCase(searchMovieByTitle.rejected, (state, action) => {
+            .addCase(searchMoviesByTitle.rejected, (state, action) => {
                 state.status = 'failed'
-                state.error = action.error.message
+                state.error = action.payload
             })
     }
 })
 
-export const { movieSearched } = moviesSlice.actions;
+export const { movieSearched, clearSearchedMovies } = moviesSlice.actions;
 export default moviesSlice.reducer;
 
 export const moviesFound = state => state.movies.searchedMovies;

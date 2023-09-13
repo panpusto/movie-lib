@@ -1,7 +1,5 @@
 import NavigationLink from "./NavigationLink";
 
-const { NavLink } = require("react-router-dom");
-
 function NavigationLinks() {
     return (
         <>

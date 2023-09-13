@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { searchMovieByTitle }
-    from "../features/movies/moviesSlice";
+import { clearSearchedMovies, searchMoviesByTitle }
+    from "../../features/movies/moviesSlice";
 
 function SearchForm({ searchActive, inputRef, setSearchActive }) {
     const dispatch = useDispatch();
@@ -23,7 +23,8 @@ function SearchForm({ searchActive, inputRef, setSearchActive }) {
     function handleSearchSubmit(e) {
         e.preventDefault();
         if (inputRef.current.value) {
-          dispatch(searchMovieByTitle(inputRef.current.value));
+            dispatch(clearSearchedMovies());
+            dispatch(searchMoviesByTitle(inputRef.current.value));
         }
     }
 
