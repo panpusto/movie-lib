@@ -9,7 +9,7 @@ function MoviesList() {
             <ul>
                 {movies && movies.map(movie => (
                     <li key={movie.imdbID}>
-                        {movie.Title}
+                        {movie.Title} - {movie.Year}
                     </li>
                 ))}
             </ul>
