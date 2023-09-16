@@ -1,0 +1,36 @@
+.searchForm {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+  
+.searchForm i {
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+  
+.searchForm input {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    display: none;
+}
+  
+.searchForm:hover i {
+    color: #e50914; 
+}
+
+.active i {
+    color: #e50914; 
+}
+  
+.active input {
+    display: inline-block;
+}

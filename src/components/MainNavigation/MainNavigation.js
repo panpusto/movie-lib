@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import SearchForm from "./SearchForm";
 import NavLinks from "./NavigationLinks";
 import Logo from "./Logo";
+import classes from "./MainNavigation.module.css";
 
 
 function MainNavigation() {
@@ -15,8 +16,8 @@ function MainNavigation() {
     }
 
     return (
-        <header className="navbar">
-                <nav className="container" onClick={closeSearchBar}>
+        <header className={classes.mainNav}>
+                <nav onClick={closeSearchBar}>
                     <Logo />
                     <NavLinks />
                     <SearchForm

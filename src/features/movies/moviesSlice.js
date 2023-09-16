@@ -12,7 +12,7 @@ const API_KEY = 'b0a90448';
 const DELAY_TIME = 2000;
 
 export const searchMoviesByTitle = createAsyncThunk(
-    'movies/searchMovieByTitle',
+    'movies/searchMoviesByTitle',
     async (query, { rejectWithValue }) => {
         await new Promise((resolve) => setTimeout(resolve, `${DELAY_TIME}`));
         const response = await fetch(`${API_URL}${API_KEY}&s=${query}`);

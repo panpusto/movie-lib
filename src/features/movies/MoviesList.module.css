@@ -1,0 +1,10 @@
+.moviesList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

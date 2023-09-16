@@ -2,20 +2,20 @@ import Spinner from "../../components/Spinner";
 import MovieCard from "./MovieCard";
 import { moviesFound } from "./moviesSlice";
 import { useSelector } from "react-redux";
+import classes from "./MoviesList.module.css";
 
 function MoviesList() {
     const movies = useSelector(moviesFound);
-    const status = useSelector(state => state.movies.status)
+    const status = useSelector(state => state.movies.status);
     const error = useSelector(state => state.movies.error);
-    console.log(status);
-    console.log(movies);
+    
     let content;
 
     if (status === 'loading') {
         content = <Spinner />
     } else if (status === 'succeeded') {
         content = (
-            <div className="movie-list">
+            <div className={classes.moviesList}>
                 {movies.map(movie => (
                     <MovieCard key={movie.imdbID}  movie={movie} />
                     )
@@ -23,7 +23,7 @@ function MoviesList() {
             </div>
             )
     } else if (status === 'failed') {
-        content = <div className="error">{error}</div>
+        content = <div className={classes.error}>{error}</div>
     }
 
     return (

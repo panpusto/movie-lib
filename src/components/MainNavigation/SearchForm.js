@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { clearSearchedMovies, searchMoviesByTitle }
     from "../../features/movies/moviesSlice";
+import classes from "./SearchForm.module.css";
 
 function SearchForm({ searchActive, inputRef, setSearchActive }) {
     const dispatch = useDispatch();
@@ -29,15 +30,22 @@ function SearchForm({ searchActive, inputRef, setSearchActive }) {
     }
 
     return (
-        <form onSubmit={handleSearchSubmit}>
-            <div className={`search-icon ${searchActive ? 'active' : ''}`}>
+        <form onSubmit={handleSearchSubmit} className={classes.searchForm}>
+            <div className={
+                searchActive
+                    ? classes.active
+                    : classes.searchForm
+            }>
                 <i className="fas fa-search" onClick={openSearchBar}/>
                 <input
                     ref={inputRef}
                     type="text"
-                    className="search-input"
                     placeholder="Search..."
-                    style={{ display: searchActive ? 'inline-block' : 'none' }}
+                    className={
+                        searchActive
+                            ? classes.active
+                            : classes.SearchForm
+                    }
                 />
             </div>
         </form>
