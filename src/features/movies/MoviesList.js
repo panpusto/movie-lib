@@ -3,6 +3,7 @@ import MovieCard from "./MovieCard";
 import { moviesFound } from "./moviesSlice";
 import { useSelector } from "react-redux";
 import classes from "./MoviesList.module.css";
+import StartPage from "../../components/StartPage";
 
 function MoviesList() {
     const movies = useSelector(moviesFound);
@@ -11,7 +12,9 @@ function MoviesList() {
     
     let content;
 
-    if (status === 'loading') {
+    if (status === 'idle') {
+        content = <StartPage />
+    } else if (status === 'loading') {
         content = <Spinner />
     } else if (status === 'succeeded') {
         content = (

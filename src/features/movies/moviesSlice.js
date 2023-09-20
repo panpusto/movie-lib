@@ -24,7 +24,7 @@ export const searchMoviesByTitle = createAsyncThunk(
         
         return data.Search || [];
     }
-);
+)
 
 const moviesSlice = createSlice({
     name: 'movies',

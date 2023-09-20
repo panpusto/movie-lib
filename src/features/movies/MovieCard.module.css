@@ -4,15 +4,30 @@
     width: 200px;
     margin: 10px;
     padding: 10px;
-    border: 1px solid #fff;
     border-radius: 5px;
+    transition: transform 0.2s ease-in-out;
 }
   
 .movieCard:hover {
-    border: 1px solid #e50914;
+    transform: translateY(-4px);
 }
   
 .movieCard img {
-    width: 100%;
-    height: auto;
+    z-index: 2;
+    width: 200px;
+    height: 300px;
+}
+
+.movieInfo {
+    padding: 16px;
+}
+
+.movieInfo h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+  
+.movieInfo p {
+    margin: 8px 0;
+    color: #888;
 }

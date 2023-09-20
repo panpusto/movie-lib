@@ -1,7 +1,13 @@
-function MovieDetails({ match }) {
-    return
+// import { useParams } from "react-router-dom";
+
+function MovieDetails() {
+    // const { movieId } = useParams();
+
+    return (
+        <>
+            Test movie!
+        </>
+    )
 }
 
 export default MovieDetails;
-
-// TODO: finish movie detail view
