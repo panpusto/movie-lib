@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    searchMovie: '',
     searchedMovies: [],
     status: 'idle',
     error: null
@@ -30,9 +29,6 @@ const moviesSlice = createSlice({
     name: 'movies',
     initialState,
     reducers: {
-        movieSearched(state, action) {
-            state.searchMovie = action.payload
-        },
         clearSearchedMovies(state, action) {
             state.searchedMovies = []
         }
@@ -53,7 +49,7 @@ const moviesSlice = createSlice({
     }
 })
 
-export const { movieSearched, clearSearchedMovies } = moviesSlice.actions;
+export const { clearSearchedMovies } = moviesSlice.actions;
 export default moviesSlice.reducer;
 
 export const moviesFound = state => state.movies.searchedMovies;

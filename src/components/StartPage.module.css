@@ -2,4 +2,9 @@
     text-align: center;
     padding: 20px;
     color: #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+.startItem:hover {
+    transform: translate3d(10px, 10px, -50px);
 }
