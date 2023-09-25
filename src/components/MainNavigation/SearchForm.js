@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import { clearSearchedMovies, searchMoviesByTitle }
     from "../../features/movies/moviesSlice";
 import classes from "./SearchForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 function SearchForm({ searchActive, inputRef, setSearchActive }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!searchActive && inputRef.current) {
@@ -26,6 +28,7 @@ function SearchForm({ searchActive, inputRef, setSearchActive }) {
         if (inputRef.current.value) {
             dispatch(clearSearchedMovies());
             dispatch(searchMoviesByTitle(inputRef.current.value));
+            navigate('/'); 
         }
     }
 
