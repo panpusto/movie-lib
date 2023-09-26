@@ -1,14 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    searchedMovies: [],
+    searched: [],
+    watchlist: [],
+    watched: [],
     status: 'idle',
     error: null
 }
 
 const API_URL = 'http://www.omdbapi.com/?apikey=';
 const API_KEY = 'b0a90448';
-const DELAY_TIME = 2000;
+const DELAY_TIME = 1000;
 
 export const searchMoviesByTitle = createAsyncThunk(
     'movies/searchMoviesByTitle',
@@ -30,8 +32,22 @@ const moviesSlice = createSlice({
     initialState,
     reducers: {
         clearSearchedMovies(state, action) {
-            state.searchedMovies = []
-        }
+            state.searched = []
+        },
+        addToWatched(state, action) {
+            state.watched.push(action.payload);
+        },
+        removeFromWatched(state, action) {
+            state.watched = state.watched.filter(
+                movie => movie.imdbID !== action.payload.imdbID);
+        },
+        addToWatchlist(state, action) {
+            state.watchlist.push(action.payload);
+        },
+        removeFromWatchlist(state, action) {
+            state.watchlist = state.watchlist.filter(
+                movie => movie.imdbID !== action.payload.imdbID);
+        },
     },
     extraReducers(builder) {
         builder
@@ -40,7 +56,7 @@ const moviesSlice = createSlice({
             })
             .addCase(searchMoviesByTitle.fulfilled, (state, action) => {
                 state.status = 'succeeded'
-                state.searchedMovies = state.searchedMovies.concat(action.payload)
+                state.searched = state.searched.concat(action.payload)
             })
             .addCase(searchMoviesByTitle.rejected, (state, action) => {
                 state.status = 'failed'
@@ -49,7 +65,15 @@ const moviesSlice = createSlice({
     }
 })
 
-export const { clearSearchedMovies } = moviesSlice.actions;
+export const {
+    clearSearchedMovies,
+    addToWatched,
+    removeFromWatched,
+    addToWatchlist,
+    removeFromWatchlist } = moviesSlice.actions;
+
 export default moviesSlice.reducer;
 
-export const moviesFound = state => state.movies.searchedMovies;
+export const moviesFound = state => state.movies.searched;
+export const moviesWatched = state => state.movies.watched;
+export const moviesWatchlist = state => state.movies.watchlist;

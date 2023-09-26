@@ -11,6 +11,16 @@
       "src": "logo.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "bookmark.png",
+      "type": "image/png",
+      "sizes": "50x50"
+    },
+    {
+      "src": "view.png",
+      "type": "image/png",
+      "sizes": "192x192"
     }
   ],
   "start_url": ".",
