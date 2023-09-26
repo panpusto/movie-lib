@@ -1,13 +1,17 @@
-.navLink li {
+.navLinks {
     font-size: 16px;
 }
   
-.navLink a {
+.navLink {
     text-decoration: none;
     color: #fff;
     transition: color 0.3s ease;
 }
   
-.navLink a:hover {
+.navLink:hover {
+    color: #e50914;
+}
+
+.active {
     color: #e50914;
 }
