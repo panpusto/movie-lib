@@ -11,7 +11,7 @@ function MoviesList({ category }) {
     const searched = useSelector(moviesFound);
     const watchlist = useSelector(moviesWatchlist);
     const watched = useSelector(moviesWatched);
-    
+
     let movies;
 
     if (category === 'searched') {
@@ -24,23 +24,22 @@ function MoviesList({ category }) {
 
     let content;
 
-    if (status === 'idle') {
-        content = <StartPage />
-    } else if (status === 'loading') {
+    if (status === 'loading') {
         content = <Spinner />
-    } else if (status === 'succeeded') {
+    } else if (status === 'failed') {
+        content = <div className={classes.error}>{error}</div>
+    } else if (category === 'searched' && searched.length === 0) {
+        content = <StartPage />
+    } else if ((status === 'succeeded') || (watched.length > 0 || watchlist.length > 0)) {
         content = (
             <div className={classes.moviesList}>
                 {movies.map(movie => (
-                    <MovieCard key={movie.imdbID}  movie={movie} />
-                    )
+                    <MovieCard key={movie.imdbID} movie={movie} />
+                )
                 )}
             </div>
-            )
-    } else if (status === 'failed') {
-        content = <div className={classes.error}>{error}</div>
+        )
     }
-
     return (
         <main>
             {content}

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export const initialMoviesState = {
     searched: [],
     watchlist: [],
     watched: [],
@@ -29,7 +29,7 @@ export const searchMoviesByTitle = createAsyncThunk(
 
 const moviesSlice = createSlice({
     name: 'movies',
-    initialState,
+    initialState: initialMoviesState,
     reducers: {
         clearSearchedMovies(state, action) {
             state.searched = []
