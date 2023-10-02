@@ -26,7 +26,7 @@ function MoviesList({ category }) {
 
     if (status === 'loading') {
         content = <Spinner />
-    } else if (status === 'failed') {
+    } else if (status === 'failed' && category === 'searched') {
         content = <div className={classes.error}>{error}</div>
     } else if (category === 'searched' && searched.length === 0) {
         content = <StartPage />
