@@ -4,6 +4,7 @@ export const initialMoviesState = {
     searched: [],
     watchlist: [],
     watched: [],
+    movieDetails: {},
     status: 'idle',
     error: null
 }
@@ -24,6 +25,16 @@ export const searchMoviesByTitle = createAsyncThunk(
         }
         
         return data.Search || [];
+    }
+)
+
+export const fetchMovieById = createAsyncThunk(
+    'movies/fetchMovieById',
+    async (movieId) => {
+        const response = await fetch(`${API_URL}${API_KEY}&i=${movieId}`);
+        const data = await response.json();
+
+        return data;
     }
 )
 
@@ -48,6 +59,9 @@ const moviesSlice = createSlice({
             state.watchlist = state.watchlist.filter(
                 movie => movie.imdbID !== action.payload.imdbID);
         },
+        clearMovieDetails(state, action) {
+            state.movieDetails = {}
+        }
     },
     extraReducers(builder) {
         builder
@@ -62,6 +76,9 @@ const moviesSlice = createSlice({
                 state.status = 'failed'
                 state.error = action.payload
             })
+            .addCase(fetchMovieById.fulfilled, (state, action) => {
+                state.movieDetails = action.payload;
+            })
     }
 })
 
@@ -70,10 +87,12 @@ export const {
     addToWatched,
     removeFromWatched,
     addToWatchlist,
-    removeFromWatchlist } = moviesSlice.actions;
+    removeFromWatchlist,
+    clearMovieDetails} = moviesSlice.actions;
 
 export default moviesSlice.reducer;
 
 export const moviesFound = state => state.movies.searched;
 export const moviesWatched = state => state.movies.watched;
 export const moviesWatchlist = state => state.movies.watchlist;
+export const singleMovieDetails = state => state.movies.movieDetails;

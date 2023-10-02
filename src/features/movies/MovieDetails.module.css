@@ -1,0 +1,31 @@
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 20, 20, 0.8);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.movieDetailsWindow {
+    width: 40rem;
+    padding: 1.5rem;
+    background-color: #141414;
+    border-radius: 8px;
+    border: solid #e50914 1px;
+    z-index: 2;
+}
+
+.movieDetailsWindow h2 {
+    margin: 0;
+}
+
+.movieDetailsWindow img {
+    z-index: 2;
+    width: 100px;
+    height: 150px;
+}

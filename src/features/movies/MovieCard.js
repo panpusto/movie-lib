@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import classes from "./MovieCard.module.css";
-import { Link } from "react-router-dom";
 import {
     addToWatched,
     addToWatchlist,
@@ -10,7 +9,8 @@ import {
     moviesWatched
 } from "./moviesSlice";
 
-function MovieCard({ movie }) {
+
+function MovieCard({ movie, onOpenDetails }) {
     const dispatch = useDispatch();
 
     const watchlist = useSelector(moviesWatchlist);
@@ -20,7 +20,7 @@ function MovieCard({ movie }) {
         mov => mov.imdbID === movie.imdbID);
     const isWatched = watched.some(
         mov => mov.imdbID === movie.imdbID);
-
+    
     function addToWatchlistHandler() {
         dispatch(addToWatchlist(movie));
     }
@@ -36,6 +36,7 @@ function MovieCard({ movie }) {
     function removeFromWatchedHandler() {
         dispatch(removeFromWatched(movie));
     }
+
 
     return (
         <div className={classes.movieCard}>
@@ -67,11 +68,12 @@ function MovieCard({ movie }) {
                 </div>
             </div>
             <div className={classes.movieInfo}>
-                <Link
-                    to={`/movies/${movie.imdbID}`}
-                    className={classes.linkText}>
-                    <h2>{movie.Title}</h2>
-                </Link>
+                <h2
+                    className={classes.linkText}
+                    onClick={() => onOpenDetails(movie)}
+                >
+                    {movie.Title}
+                </h2>
                 <p>{movie.Year}</p>
             </div>
         </div>
